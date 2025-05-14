@@ -1,1 +1,3 @@
-update_index.ps1
+*.ps1
+*.svg
+own.png
