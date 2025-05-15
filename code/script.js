@@ -1,5 +1,5 @@
 addEventListener('DOMContentLoaded', event => {
-    document.querySelectorAll('.script-injection').forEach(item => {
+    document.querySelectorAll('pre[script] > code').forEach(item => {
         let name = item.getAttribute('script');
         fetch(`https://in5perat0r.github.io/userscripts/${name}`).then(response => {
             response.text().then(txt => {
