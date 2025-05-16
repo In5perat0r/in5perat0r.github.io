@@ -3,29 +3,46 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" type="image/png" sizes="16x16" href="../favicon/own_16.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="../favicon/own_32.png">
-        <link rel="icon" type="image/png" sizes="48x48" href="../favicon/own_48.png">
-        <link rel="icon" type="image/png" sizes="57x57" href="../favicon/own_57.png">
-        <link rel="icon" type="image/png" sizes="60x60" href="../favicon/own_60.png">
-        <link rel="icon" type="image/png" sizes="72x72" href="../favicon/own_72.png">
-        <link rel="icon" type="image/png" sizes="76x76" href="../favicon/own_76.png">
-        <link rel="icon" type="image/png" sizes="96x96" href="../favicon/own_96.png">
-        <link rel="icon" type="image/png" sizes="114x114" href="../favicon/own_114.png">
-        <link rel="icon" type="image/png" sizes="120x120" href="../favicon/own_120.png">
-        <link rel="icon" type="image/png" sizes="128x128" href="../favicon/own_128.png">
-        <link rel="icon" type="image/png" sizes="144x144" href="../favicon/own_144.png">
-        <link rel="icon" type="image/png" sizes="152x152" href="../favicon/own_152.png">
-        <link rel="icon" type="image/png" sizes="167x167" href="../favicon/own_167.png">
-        <link rel="apple-touch-icon" sizes="180x180" href="../favicon/own_180.png">
-        <link rel="icon" type="image/png" sizes="192x192" href="../favicon/own_192.png">
-        <link rel="icon" type="image/png" sizes="256x256" href="../favicon/own_256.png">
-        <link rel="icon" type="image/png" sizes="512x512" href="../favicon/own_512.png">
+        <title>Info Archive</title>
+        <link rel="stylesheet" href="../external/bootstrap.min.css">
         <link rel="stylesheet" href="style.css">
+        <script src="../external/jquery.min.js"></script>
+        <script src="../external/bootstrap.min.js"></script>
+        <script src="../external/bootbox.js"></script>
+        <script src="../external/sjcl.js"></script>
+        <script src="../external/core/sha256.js"></script>
         <script src="script.js"></script>
-        <title>In5perat0r IO - Documentation</title>
     </head>
     <body>
-        Docs
+        <div id="header">
+            <svg id="sidemenu" width="800px" height="800px" viewBox="0 0 24.75 24.75">
+                <path d="M0,3.875c0-1.104,0.896-2,2-2h20.75c1.104,0,2,0.896,2,2s-0.896,2-2,2H2C0.896,5.875,0,4.979,0,3.875z M22.75,10.375H2   c-1.104,0-2,0.896-2,2c0,1.104,0.896,2,2,2h20.75c1.104,0,2-0.896,2-2C24.75,11.271,23.855,10.375,22.75,10.375z M22.75,18.875H2   c-1.104,0-2,0.896-2,2s0.896,2,2,2h20.75c1.104,0,2-0.896,2-2S23.855,18.875,22.75,18.875z"></path>
+            </svg>
+            <div id="bb"></div>
+            <span id="header-title">Info Archive</span>
+        </div>
+        <div>
+            <div id="sidebar">
+                <div data-id="index" class="sideItem focused"><p>Index Hub</p></div>
+            </div>
+            <div id="pageViews">
+                <div id="index" class="content-pane show">
+                    <div id="index-header">
+                        <h1>Index</h1>
+                    </div>
+                    <div>
+                        <div id="index-navigator">
+                            <table>
+                                <tbody>
+                                    <tr><td><div href="https://in5perat0r.github.io/code" class="navBtn" data-id="id1"><span class="bold">T1</span></div></td></tr>
+                                    <tr><td><div href="https://in5perat0r.github.io/docs" class="navBtn" data-id="id2"><span class="bold">T2</span></div></td></tr>
+                                    <tr><td><div href="https://in5perat0r.github.io/test" class="navBtn" data-id="id3"><span class="bold">T3</span></div></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
