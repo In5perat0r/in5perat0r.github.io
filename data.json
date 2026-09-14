@@ -4,6 +4,10 @@
         {
             "title": "Redirect",
             "sub_index": "/redirect/index_redirect.html"
+        },
+        {
+            "title": "Diagnostics",
+            "sub_index": "/diagnostics/index_diagnostics.html"
         }
     ]
 }

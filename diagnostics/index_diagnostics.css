@@ -1,0 +1,214 @@
+:root {
+  --void: #0a0117;
+  --panel: rgba(255, 255, 255, 0.035);
+  --panel-border: rgba(255, 143, 208, 0.16);
+
+  --pink: #ff3fa4;
+  --pink-soft: #ff8fd0;
+  --violet: #7c3aed;
+  --cyan: #29e0ff;
+
+  --text: #f4ecff;
+  --text-soft: rgba(244, 236, 255, 0.55);
+  --text-softer: rgba(244, 236, 255, 0.35);
+
+  --ok: #6ff0c0;
+  --no: rgba(244, 236, 255, 0.3);
+
+  --font-display: "Rajdhani", "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background:
+    radial-gradient(ellipse 900px 500px at 12% -8%, rgba(255, 63, 164, 0.16), transparent 60%),
+    radial-gradient(ellipse 800px 600px at 92% 8%, rgba(124, 58, 237, 0.18), transparent 55%),
+    radial-gradient(ellipse 700px 500px at 50% 105%, rgba(41, 224, 255, 0.08), transparent 60%),
+    var(--void);
+  color: var(--text);
+  font-family: var(--font-mono);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: clamp(24px, 6vw, 64px) 20px 80px;
+}
+
+.back-link {
+  position: fixed;
+  top: 20px;
+  left: 24px;
+  color: var(--text-soft);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  text-decoration: none;
+  transition: color 0.18s ease;
+}
+
+.back-link:hover,
+.back-link:focus-visible {
+  color: var(--pink-soft);
+}
+
+.page {
+  width: 100%;
+  max-width: 720px;
+}
+
+.page__header {
+  border-bottom: 1px solid rgba(255, 143, 208, 0.18);
+  padding-bottom: 22px;
+  margin-bottom: 26px;
+}
+
+.page__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(36px, 6vw, 48px);
+  letter-spacing: 0.01em;
+  background: linear-gradient(100deg, var(--pink) 0%, var(--pink-soft) 35%, var(--violet) 70%, var(--cyan) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 20px rgba(255, 63, 164, 0.22));
+}
+
+.page__meta {
+  margin: 10px 0 0;
+  font-size: 13px;
+  color: var(--text-soft);
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 22px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.01em;
+  border: none;
+  border-radius: 8px;
+  padding: 11px 20px;
+  cursor: pointer;
+  transition: transform 0.16s ease, box-shadow 0.16s ease, filter 0.16s ease, opacity 0.16s ease;
+}
+
+.btn--pink {
+  background: linear-gradient(135deg, var(--pink), var(--pink-soft));
+  color: var(--void);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--text-soft);
+  border: 1px solid var(--panel-border);
+}
+
+.btn:hover:not(:disabled),
+.btn:focus-visible:not(:disabled) {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+  box-shadow: 0 8px 24px -8px rgba(255, 63, 164, 0.35);
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+}
+
+.log {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 12px;
+  backdrop-filter: blur(6px);
+  padding: 22px 24px;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.log__placeholder {
+  margin: 0;
+  color: var(--text-softer);
+}
+
+.log__scanned-at {
+  margin: 0 0 18px;
+  color: var(--text-softer);
+  font-size: 12px;
+}
+
+.log__section {
+  margin-bottom: 20px;
+}
+
+.log__section:last-child {
+  margin-bottom: 0;
+}
+
+.log__section-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  color: var(--pink-soft);
+  margin: 0 0 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(255, 143, 208, 0.14);
+}
+
+.log__row {
+  display: flex;
+  gap: 16px;
+  padding: 3px 0;
+  align-items: baseline;
+}
+
+.log__key {
+  flex: 0 0 220px;
+  color: var(--text-soft);
+}
+
+.log__value {
+  flex: 1;
+  color: var(--text);
+  word-break: break-word;
+}
+
+.log__value--yes {
+  color: var(--ok);
+}
+
+.log__value--no {
+  color: var(--no);
+}
+
+@media (max-width: 560px) {
+  .log__row {
+    flex-direction: column;
+    gap: 2px;
+  }
+  .log__key {
+    flex: none;
+  }
+}
