@@ -73,7 +73,7 @@
   } catch (err) {
     titleEl.textContent = "Index";
     emptyEl.hidden = false;
-    emptyEl.textContent = "data.json konnte nicht geladen werden (" + err.message + ").";
-    console.error("Fehler beim Laden von data.json:", err);
+    emptyEl.textContent = "Could not load data.json (" + err.message + ").";
+    console.error("Error loading data.json:", err);
   }
 })();
