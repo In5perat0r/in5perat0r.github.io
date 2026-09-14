@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirect</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="index_redirect.css">
+</head>
+<body>
+
+  <a class="back-link" href="index.html">&lsaquo; Index</a>
+
+  <main class="panel">
+    <h1 class="panel__title">Redirect</h1>
+    <p class="panel__meta">Open a URL in the tab, window, or context you need.</p>
+
+    <div class="field-row">
+      <input
+        id="url-input"
+        class="url-input"
+        type="text"
+        placeholder="https://example.com"
+        autocomplete="off"
+        spellcheck="false"
+      >
+      <label class="checkbox">
+        <input id="validate-checkbox" type="checkbox" checked>
+        <span>Validate URL</span>
+      </label>
+    </div>
+
+    <div class="actions">
+      <button id="open-self" class="btn btn--pink" type="button">Open in this tab</button>
+      <button id="open-tab" class="btn btn--violet" type="button">Open in new tab</button>
+      <button id="open-window" class="btn btn--cyan" type="button">Open in new window</button>
+    </div>
+  </main>
+
+  <dialog id="invalid-dialog" class="dialog">
+    <p class="dialog__message" id="invalid-dialog-message">This URL is invalid.</p>
+    <button id="dialog-close" class="btn btn--pink" type="button">Close</button>
+  </dialog>
+
+  <script src="index_redirect.js"></script>
+</body>
+</html>
