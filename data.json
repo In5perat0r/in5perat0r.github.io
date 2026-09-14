@@ -1,0 +1,21 @@
+{
+    "header": "Title",
+    "entries": [
+        {
+            "title": "Seite 1",
+            "sub_index": "/test/index.html"
+        },
+        {
+            "title": "Seite 2",
+            "sub_index": "/www/index.html"
+        },
+        {
+            "title": "Seite 3",
+            "sub_index": "/was/index.html"
+        },
+        {
+            "title": "Seite 4",
+            "sub_index": "/ggg/index.html"
+        }
+    ]
+}
