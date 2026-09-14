@@ -7,7 +7,7 @@
   const emptyEl = document.getElementById("empty-state");
 
   function catalogNumber(index) {
-    return "No. " + String(index + 1).padStart(2, "0");
+    return "0x" + (index + 1).toString(16).padStart(2, "0").toUpperCase();
   }
 
   function buildCard(entry, index) {

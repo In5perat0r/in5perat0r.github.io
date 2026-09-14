@@ -1,16 +1,19 @@
 :root {
-  --ink: #1b2430;
-  --ink-deep: #141b24;
-  --paper: #e7ded1;
-  --paper-light: #f1ebe0;
-  --rust: #c97b2e;
-  --rust-deep: #a4611f;
-  --teal: #4e7c74;
-  --cream: #f2ede0;
-  --ink-text: #2a2118;
-  --ink-text-soft: #5a5147;
+  --void: #0a0117;
+  --void-deep: #050110;
+  --panel: rgba(255, 255, 255, 0.035);
+  --panel-hover: rgba(255, 255, 255, 0.06);
 
-  --font-display: "Fraunces", Georgia, serif;
+  --pink: #ff3fa4;
+  --pink-soft: #ff8fd0;
+  --violet: #7c3aed;
+  --cyan: #29e0ff;
+
+  --text: #f4ecff;
+  --text-soft: rgba(244, 236, 255, 0.55);
+  --text-softer: rgba(244, 236, 255, 0.35);
+
+  --font-display: "Rajdhani", "Segoe UI", sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
   color-scheme: dark;
@@ -26,11 +29,12 @@ html, body {
 }
 
 body {
-  background: var(--ink);
-  background-image:
-    radial-gradient(ellipse at 15% -10%, rgba(201, 123, 46, 0.10), transparent 45%),
-    radial-gradient(ellipse at 85% 110%, rgba(78, 124, 116, 0.10), transparent 45%);
-  color: var(--cream);
+  background:
+    radial-gradient(ellipse 900px 500px at 12% -8%, rgba(255, 63, 164, 0.16), transparent 60%),
+    radial-gradient(ellipse 800px 600px at 92% 8%, rgba(124, 58, 237, 0.18), transparent 55%),
+    radial-gradient(ellipse 700px 500px at 50% 105%, rgba(41, 224, 255, 0.08), transparent 60%),
+    var(--void);
+  color: var(--text);
   font-family: var(--font-mono);
   min-height: 100vh;
   display: flex;
@@ -44,31 +48,49 @@ body {
 }
 
 .drawer__header {
-  border-bottom: 1px solid rgba(242, 237, 224, 0.16);
-  padding-bottom: 20px;
-  margin-bottom: 28px;
+  border-bottom: 1px solid rgba(255, 143, 208, 0.18);
+  padding-bottom: 22px;
+  margin-bottom: 30px;
 }
 
 .drawer__eyebrow {
-  margin: 0 0 6px;
+  margin: 0 0 8px;
+  font-family: var(--font-mono);
   font-size: 12.5px;
-  letter-spacing: 0.04em;
-  color: var(--rust);
+  letter-spacing: 0.03em;
+  color: var(--pink-soft);
+}
+
+.drawer__eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 8px 1px var(--cyan);
+  vertical-align: middle;
 }
 
 .drawer__title {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 500;
-  font-size: clamp(32px, 6vw, 44px);
-  line-height: 1.1;
-  color: var(--cream);
+  font-weight: 700;
+  font-size: clamp(38px, 7vw, 52px);
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+  background: linear-gradient(100deg, var(--pink) 0%, var(--pink-soft) 35%, var(--violet) 70%, var(--cyan) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 22px rgba(255, 63, 164, 0.25));
 }
 
 .drawer__meta {
   margin: 10px 0 0;
   font-size: 13px;
-  color: rgba(242, 237, 224, 0.55);
+  color: var(--text-soft);
 }
 
 .cards {
@@ -82,8 +104,8 @@ body {
 
 .card {
   opacity: 0;
-  transform: translateY(10px);
-  animation: settle 0.5s ease forwards;
+  transform: translateY(12px);
+  animation: settle 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   animation-delay: var(--delay, 0s);
 }
 
@@ -97,52 +119,69 @@ body {
 .card__link {
   position: relative;
   display: grid;
-  grid-template-columns: 64px 1fr;
+  grid-template-columns: 72px 1fr;
   align-items: stretch;
-  background: var(--paper);
-  color: var(--ink-text);
+  background: var(--panel);
+  color: var(--text);
   text-decoration: none;
-  border-radius: 3px;
+  border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  border: 1px solid rgba(255, 143, 208, 0.16);
+  backdrop-filter: blur(6px);
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card__link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  padding: 1px;
+  background: linear-gradient(135deg, var(--pink), transparent 40%, transparent 60%, var(--violet));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
 }
 
 .card__link:hover,
 .card__link:focus-visible {
-  transform: translateX(6px);
-  box-shadow: -3px 4px 0 rgba(0, 0, 0, 0.28);
+  transform: translateY(-2px);
+  background: var(--panel-hover);
+  border-color: rgba(255, 63, 164, 0.4);
+  box-shadow: 0 8px 30px -8px rgba(255, 63, 164, 0.35), 0 0 0 1px rgba(124, 58, 237, 0.15);
+}
+
+.card__link:hover::after,
+.card__link:focus-visible::after {
+  opacity: 1;
 }
 
 .card__link:focus-visible {
-  outline: 2px solid var(--teal);
-  outline-offset: 2px;
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
 }
 
 .card__tab {
-  background: var(--rust);
-  color: var(--ink-deep);
+  background: linear-gradient(160deg, var(--pink) 0%, var(--violet) 100%);
+  color: rgba(5, 1, 16, 0.85);
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 500;
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
   letter-spacing: 0.02em;
-  padding: 10px 0;
-  transition: background 0.18s ease;
 }
 
 .card:nth-child(3n+2) .card__tab {
-  background: var(--teal);
-  color: var(--paper-light);
+  background: linear-gradient(160deg, var(--violet) 0%, var(--cyan) 100%);
 }
 
 .card:nth-child(3n) .card__tab {
-  background: var(--ink-text);
-  color: var(--paper-light);
+  background: linear-gradient(160deg, var(--cyan) 0%, var(--pink) 100%);
 }
 
 .card__body {
@@ -155,26 +194,27 @@ body {
 
 .card__title {
   font-family: var(--font-display);
-  font-weight: 500;
-  font-size: 19px;
-  color: var(--ink-text);
+  font-weight: 600;
+  font-size: 21px;
+  letter-spacing: 0.01em;
+  color: var(--text);
 }
 
 .card__path {
   font-size: 12px;
-  color: var(--ink-text-soft);
+  color: var(--text-softer);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .empty-state {
-  color: rgba(242, 237, 224, 0.6);
+  color: var(--text-soft);
   font-size: 13px;
 }
 
 .empty-state code {
-  color: var(--rust);
+  color: var(--pink-soft);
 }
 
 @media (prefers-reduced-motion: reduce) {
