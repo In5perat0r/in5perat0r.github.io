@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advanced Calculator</title>
+
+  <link rel="icon" type="image/png" sizes="16x16" href="../favicon/own_16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon/own_32.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="../favicon/own_48.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="../favicon/own_96.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon/own_192.png">
+  <link rel="icon" type="image/png" sizes="256x256" href="../favicon/own_256.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="../favicon/own_512.png">
+  <link rel="shortcut icon" href="../favicon/own_32.png">
+
+  <link rel="apple-touch-icon" sizes="57x57" href="../favicon/own_57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="../favicon/own_60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="../favicon/own_72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="../favicon/own_76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="../favicon/own_114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="../favicon/own_120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="../favicon/own_144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="../favicon/own_152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="../favicon/own_167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../favicon/own_180.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="index_advanced_calculator.css">
+</head>
+<body>
+
+  <a class="back-link" href="../index.html">&lsaquo; Index</a>
+
+  <main class="page">
+    <header class="page__header">
+      <h1 class="page__title">Advanced Calculator</h1>
+      <p class="page__meta">Build programmable calculation presets and use them live.</p>
+    </header>
+
+    <p id="notice" class="notice" role="status" hidden></p>
+
+    <nav class="tabs" role="tablist" aria-label="Sections">
+      <button id="tab-calculator" class="tab" type="button" role="tab" aria-selected="true">Calculator</button>
+      <button id="tab-builder" class="tab" type="button" role="tab" aria-selected="false">Builder</button>
+      <button id="tab-presets" class="tab" type="button" role="tab" aria-selected="false">Presets</button>
+    </nav>
+
+    <!-- ============ Calculator ============ -->
+    <section id="view-calculator" class="view">
+      <div id="calc-empty" class="panel panel--center" hidden>
+        <p class="hint">No presets yet. Create your first calculation preset in the Builder.</p>
+        <button id="btn-empty-create" class="btn btn--pink" type="button">Create preset</button>
+      </div>
+
+      <div id="calc-main" hidden>
+        <div class="panel">
+          <div class="toolbar">
+            <label class="field field--grow">
+              <span class="field__label">Preset</span>
+              <select id="preset-select" class="select"></select>
+            </label>
+            <button id="btn-edit-preset" class="btn btn--ghost btn--small" type="button">Edit</button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2 class="section-title">Inputs</h2>
+          <div id="calc-inputs" class="calc-fields"></div>
+        </div>
+
+        <div class="panel">
+          <h2 class="section-title">Outputs</h2>
+          <div id="calc-outputs" class="outputs"></div>
+          <p id="calc-status" class="status" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Builder ============ -->
+    <section id="view-builder" class="view" hidden>
+      <div class="panel">
+        <h2 id="builder-title" class="section-title">New preset</h2>
+
+        <label class="field">
+          <span class="field__label">Preset name</span>
+          <input id="draft-name" class="text-input" type="text" maxlength="60" autocomplete="off" placeholder="e.g. Rectangle area">
+        </label>
+
+        <div class="field">
+          <span class="field__label">Mode</span>
+          <div class="segmented" role="group" aria-label="Preset mode">
+            <button id="mode-simple" class="segmented__btn" type="button" aria-pressed="true">Simple</button>
+            <button id="mode-advanced" class="segmented__btn" type="button" aria-pressed="false">Advanced</button>
+          </div>
+          <p class="hint">Simple: chain ready-made operations. Advanced: write the calculation as JavaScript.</p>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2 class="section-title">Inputs</h2>
+        <div id="io-inputs" class="io-list"></div>
+        <button id="btn-add-input" class="btn btn--ghost btn--small" type="button">+ Add input</button>
+      </div>
+
+      <div class="panel">
+        <h2 class="section-title">Outputs</h2>
+        <div id="io-outputs" class="io-list"></div>
+        <button id="btn-add-output" class="btn btn--ghost btn--small" type="button">+ Add output</button>
+      </div>
+
+      <div id="simple-editor" class="panel">
+        <h2 class="section-title">Operation chain</h2>
+        <p class="hint">Each operation can read an input variable, a constant, or the result of the previous operation. Every result is also passed on to the next operation; optionally store it in an output as well.</p>
+        <div id="steps" class="steps"></div>
+        <button id="btn-add-step" class="btn btn--ghost btn--small" type="button">+ Add operation</button>
+      </div>
+
+      <div id="advanced-editor" class="panel" hidden>
+        <h2 class="section-title">Calculation code</h2>
+        <p id="code-hint" class="hint"></p>
+        <textarea id="code" class="code-input" spellcheck="false" rows="10" aria-label="Calculation code"></textarea>
+        <p class="hint">Plain JavaScript (for example <code>Math.sqrt</code>). Do not use <code>return</code>; just assign the output variables. Runs in a sandboxed worker with a 1.5 s time limit.</p>
+      </div>
+
+      <ul id="builder-errors" class="errors" role="alert" hidden></ul>
+
+      <div class="actions">
+        <button id="btn-save" class="btn btn--pink" type="button">Save preset</button>
+        <button id="btn-reset" class="btn btn--ghost" type="button">Reset / new</button>
+      </div>
+    </section>
+
+    <!-- ============ Presets ============ -->
+    <section id="view-presets" class="view" hidden>
+      <div class="panel">
+        <h2 class="section-title">Saved presets</h2>
+        <p id="presets-empty" class="hint" hidden>Nothing saved yet.</p>
+        <ul id="preset-list" class="preset-list"></ul>
+      </div>
+
+      <div class="panel">
+        <h2 class="section-title">Export / import (JSON)</h2>
+        <p class="hint">Presets live in this browser's localStorage. Use this to back them up or move them to another device.</p>
+        <textarea id="json-area" class="code-input" spellcheck="false" rows="8" aria-label="Preset JSON" placeholder='Press "Export all" or paste JSON here and press "Import"'></textarea>
+        <div class="actions actions--left">
+          <button id="btn-export" class="btn btn--pink btn--small" type="button">Export all</button>
+          <button id="btn-import" class="btn btn--ghost btn--small" type="button">Import</button>
+        </div>
+        <p id="json-status" class="status" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="dialog" class="dialog">
+    <p id="dialog-message" class="dialog__message"></p>
+    <div class="dialog__actions">
+      <button id="dialog-cancel" class="btn btn--ghost" type="button">Cancel</button>
+      <button id="dialog-confirm" class="btn btn--pink" type="button">OK</button>
+    </div>
+  </dialog>
+
+  <script src="index_advanced_calculator.js"></script>
+</body>
+</html>

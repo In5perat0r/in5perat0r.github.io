@@ -8,6 +8,10 @@
         {
             "title": "Diagnostics",
             "sub_index": "/diagnostics/index_diagnostics.html"
+        },
+        {
+            "title": "Advanced Calculator",
+            "sub_index": "/advanced_calculator/index_advanced_calculator.html"
         }
     ]
 }
